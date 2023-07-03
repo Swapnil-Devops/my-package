@@ -43,6 +43,8 @@ jobs:
 
       - name: Fetch Package Metadata
         run: |
-          curl -X GET \
-            -H "Authorization: Bearer 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" \
-            "https://api.github.com/repos/Swapnil-Devops/my-package/packages/my-package"
+          curl -L \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://github.com/Swapnil-Devops/my-package/pkgs/container/my-package
