@@ -40,10 +40,9 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-        
-      - name: Get Package Metadata
-        id: get-metadata
-        uses: Swapnil-Devops/Package-Introspection-Action@main
-        with:
-          package-name: 'my-package'
-          token: ${{ secrets.GITHUB_TOKEN }}     
+
+      - name: Fetch Package Metadata
+        run: |
+          curl -X GET \
+            -H "Authorization: Bearer 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" \
+            "https://api.github.com/repos/Swapnil-Devops/my-package/packages/my-package"
