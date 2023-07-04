@@ -41,10 +41,17 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Fetch Package Metadata
-        run: |
-          curl -L \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            https://github.com/Swapnil-Devops/my-package/pkgs/container/my-package
+      # - name: Fetch Package Metadata
+      #   run: |
+      #     curl -L \
+      #       -H "Accept: application/vnd.github+json" \
+      #       -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+      #       -H "X-GitHub-Api-Version: 2022-11-28" \
+      #       https://github.com/Swapnil-Devops/my-package/pkgs/container/my-package
+       
+      - name: Get Package Metadata
+        id: get-metadata
+        uses: Swapnil-Devops/Package-Introspection-Action@main
+        with:
+          package-name: 'ghcr.io/swapnil-devops/my-package:sha-ef14365'
+          token: ${{ secrets.GH_TOKEN }}   
