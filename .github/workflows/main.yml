@@ -27,41 +27,17 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          tags: |
-            type=ref,event=branch
-            type=sha
-
+          
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
-      # - name: Fetch Package Metadata
-      #   run: |
-      #     curl -L \
-      #       -H "Accept: application/vnd.github+json" \
-      #       -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-      #       -H "X-GitHub-Api-Version: 2022-11-28" \
-      #       https://github.com/Swapnil-Devops/my-package/pkgs/container/my-package
-       
-      # - name: Get Package Metadata
-      #   id: get-metadata
-      #   uses: Swapnil-Devops/Package-Introspection-Action@main
-      #   with:
-      #     package-name: 'ghcr.io/swapnil-devops/my-package:sha-ef14365'
-      #     token: ${{ secrets.GH_TOKEN }}   
+          labels: ${{ steps.meta.outputs.labels }} 
 
       - name: Delete untagged versions
-        uses: Swapnil-Devops/delete-untagged-action@main
+        uses: Swapnil-Devops/package-metadata-action@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           package-name: my-package
