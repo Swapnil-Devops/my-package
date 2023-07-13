@@ -9,6 +9,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
 jobs:
   Package-Introspection:
@@ -41,6 +42,7 @@ jobs:
           repository: ${{ github.repository }}
       - run: npm i     
           
+
       # - uses: octokit/graphql-action@v2.x
       #   with:
       #     query: |
