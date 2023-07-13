@@ -39,8 +39,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           package-name: my-package
-          repository: ${{ github.repository }}
-      - run: npm i     
+          repository: ${{ github.repository }}    
           
 
       # - uses: octokit/graphql-action@v2.x
