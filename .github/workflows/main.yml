@@ -1,4 +1,4 @@
-name: Create and publish a Docker image
+name: Package Introspection
 
 on:
   push:
@@ -33,5 +33,4 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           package-name: my-package
-          personal-account: true
           repository: ${{ github.repository }}
